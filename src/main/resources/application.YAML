@@ -4,6 +4,12 @@ spring:
     username: root
     password: a54357412
 #    driver-class-name: org.h2.Driver
+  devtools:
+    restart:
+      enabled: true  #设置开启热部署
+      additional-paths: src/main/java #重启目录
+      exclude: WEB-INF/**
+
 
 github:
   client:
@@ -11,3 +17,8 @@ github:
     secret: ec117b3ff403077da0400372e11147031009cca8
   redirect:
     uri: http://localhost:8080/callback
+
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
