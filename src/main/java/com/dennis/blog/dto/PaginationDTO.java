@@ -25,9 +25,10 @@ public class PaginationDTO {
 
     private Integer totalPage;
 
-    public void setPagination(Integer totalCount, Integer page, Integer size) {
+    public void setPagination(Integer totalPage, Integer page) {
 
-        totalPage = totalCount % size == 0 ? totalCount / size : totalCount / size + 1;
+        this.totalPage = totalPage;
+        this.page = page;
 
         pages.add(page);
         //已经加了一个向前翻页，所以i从1开始
@@ -41,7 +42,6 @@ public class PaginationDTO {
             }
         }
 
-        this.page = page;
 
         //是否展示上一页
         if (page == 1) {
