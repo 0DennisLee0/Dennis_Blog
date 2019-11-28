@@ -1,6 +1,7 @@
 package com.dennis.blog.mapper;
 
 import com.dennis.blog.model.User;
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -18,4 +19,7 @@ public interface UserMapper {
 
     @Select("select * from user where id = #{id}")
     User findById(@Param("id") Integer id);
+
+    @Select("select * from user")
+    Page<User> getUserList();
 }
