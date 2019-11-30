@@ -5,6 +5,7 @@ import com.dennis.blog.dto.GithubUser;
 import com.dennis.blog.mapper.UserMapper;
 import com.dennis.blog.model.User;
 import com.dennis.blog.provider.GithubProvider;
+import com.dennis.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -34,19 +35,20 @@ public class AuthorizeController {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/callback")
     public String callback(@RequestParam(name="code")String code,
                            @RequestParam(name="state")String state,
-                           HttpServletRequest request,
                            HttpServletResponse response){
 
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
 
-        accessTokenDTO.setClient_id("7ec7112452d3904f4082");
-        accessTokenDTO.setClient_secret("ec117b3ff403077da0400372e11147031009cca8");
+        accessTokenDTO.setClient_id(clientId);
+        accessTokenDTO.setClient_secret(clientSecret);
         accessTokenDTO.setCode(code);
-        accessTokenDTO.setRedirect_uri("http://localhost:8080/callback");
+        accessTokenDTO.setRedirect_uri(redirectUri);
         accessTokenDTO.setState(state);
 
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);
@@ -59,12 +61,10 @@ public class AuthorizeController {
             user.setToken(token);
             user.setName(githubUser.getName());
             user.setAccountId(String.valueOf(githubUser.getId()));
-            user.setGmtCreate(System.currentTimeMillis());
-            user.setGmtModified(user.getGmtCreate());
             user.setAvatarUrl(githubUser.getAvatarUrl());
             userMapper.insert(user);
+            userService.createOrUpdate(user);
             //put token into cookie
-            request.getSession().setAttribute("user", githubUser);
             response.addCookie(new Cookie("token", token));
             return "redirect:/";
             //success, write into cookie and session
@@ -73,5 +73,15 @@ public class AuthorizeController {
             //failed
         }
 
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request,
+                         HttpServletResponse response){
+        request.getSession().removeAttribute("user");
+        Cookie cookie = new Cookie("token", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "redirect:/";
     }
 }

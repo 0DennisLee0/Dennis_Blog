@@ -2,10 +2,7 @@ package com.dennis.blog.mapper;
 
 import com.dennis.blog.model.User;
 import com.github.pagehelper.Page;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface UserMapper {
@@ -22,4 +19,11 @@ public interface UserMapper {
 
     @Select("select * from user")
     Page<User> getUserList();
+
+    @Select("select * from user where account_id=#{accountId}")
+    User findByAccountId(@Param("accountId") String accountId);
+
+    // #可以代表dbUser下面的属性
+    @Update("update user set name = #{name}, token = #{token}, gmt_modified = #{gmtModified}, avatar_url = #{avatarUrl} where id = #{id}")
+    void update(User dbUser);
 }
