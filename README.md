@@ -29,3 +29,6 @@ create table user
 );
 ```
 
+```bash
+mvn -Dmybatis.generator.overwrite=trur mybatis-generator:generate
+```
