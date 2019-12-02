@@ -23,7 +23,7 @@ github:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
-  type-aliases-package: com.dennis.blog.model
+  type-aliases-package: com.dennis.blog.mapper
   mapper-locations: classpath:mapper/*.xml
 
 

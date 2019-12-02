@@ -20,7 +20,6 @@ public class UserService {
         userExample.createCriteria()
                 .andAccountIdEqualTo(user.getAccountId());
         List<User> users = userMapper.selectByExample(userExample);
-//        User dbUser = userMapper.findByAccountId(user.getAccountId());
 
         if(users.size() == 0){
             // 插入
@@ -31,10 +30,11 @@ public class UserService {
             //更新
             User dbUser = users.get(0);
             User updateUser = new User();
-            user.setGmtModified(System.currentTimeMillis());
-            user.setAvatarUrl(user.getAvatarUrl());
-            user.setName(user.getName());
-            user.setToken(user.getToken());
+            updateUser.setId(user.getId());
+            updateUser.setGmtModified(System.currentTimeMillis());
+            updateUser.setAvatarUrl(user.getAvatarUrl());
+            updateUser.setName(user.getName());
+            updateUser.setToken(user.getToken());
             UserExample example = new UserExample();
             example.createCriteria()
                     .andIdEqualTo(dbUser.getId());

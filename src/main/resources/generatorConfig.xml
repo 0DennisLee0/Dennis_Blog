@@ -6,10 +6,16 @@
 <generatorConfiguration>
 
     <context id="MySQLTable" targetRuntime="MyBatis3">
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/testdb?serverTimezone=UTC"
+                        connectionURL="jdbc:mysql://localhost:3306/testdb"
                         userId="root"
                         password="a54357412">
+            <!--MySQL 8.x 需要指定服务器的时区-->
+            <property name="serverTimezone" value="UTC"/>
+            <!--MySQL 不支持 schema 或者 catalog 所以需要添加这个-->
+            <!--参考 : http://www.mybatis.org/generator/usage/mysql.html-->
+            <property name="nullCatalogMeansCurrent" value="true"/>
         </jdbcConnection>
 
         <javaTypeResolver>
@@ -29,8 +35,8 @@
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table tableName="user" domainObjectName="User">
-        </table>
+        <table tableName="user" domainObjectName="User"></table>
+        <table tableName="question" domainObjectName="Question"></table>
 
     </context>
 </generatorConfiguration>
