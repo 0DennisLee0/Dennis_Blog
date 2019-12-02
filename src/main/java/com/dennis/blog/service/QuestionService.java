@@ -49,7 +49,7 @@ public class QuestionService {
 
 
         for (Question question : questions) {
-            User user = userMapper.findById(question.getCreator());
+            User user = userMapper.selectByPrimaryKey(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
             //复制属性
             BeanUtils.copyProperties(question, questionDTO);
@@ -91,7 +91,7 @@ public class QuestionService {
 
 
         for (Question question : questions) {
-            User user = userMapper.findById(question.getCreator());
+            User user = userMapper.selectByPrimaryKey(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
             //复制属性
             BeanUtils.copyProperties(question, questionDTO);
@@ -105,7 +105,7 @@ public class QuestionService {
 
     public QuestionDTO getById(Integer id) {
         Question question = questionMapper.getById(id);
-        User user = userMapper.findById(question.getCreator());
+        User user = userMapper.selectByPrimaryKey(question.getCreator());
         QuestionDTO questionDTO = new QuestionDTO();
         //复制属性
         BeanUtils.copyProperties(question, questionDTO);

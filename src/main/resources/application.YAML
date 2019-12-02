@@ -23,6 +23,9 @@ github:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
+  type-aliases-package: com.dennis.blog.model
+  mapper-locations: classpath:mapper/*.xml
+
 
 pagehelper:
   helperDialect: mysql
