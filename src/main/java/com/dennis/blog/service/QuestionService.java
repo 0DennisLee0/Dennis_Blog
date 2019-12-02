@@ -29,14 +29,15 @@ public class QuestionService {
         Integer totalCount = questionMapper.count();
         totalPage = totalCount % size == 0 ? totalCount / size : totalCount / size + 1;
 
+        if (page > totalPage) {
+            page = totalPage;
+        }
 
         if (page < 1) {
             page = 1;
         }
 
-        if (page > totalPage) {
-            page = totalPage;
-        }
+
 
         paginationDTO.setPagination(totalPage, page);
 
@@ -67,13 +68,14 @@ public class QuestionService {
         Integer totalCount = questionMapper.countByUserId(userId);
         totalPage = totalCount % size == 0 ? totalCount / size : totalCount / size + 1;
 
+        if (page > totalPage) {
+            page = totalPage;
+        }
+
         if (page < 1) {
             page = 1;
         }
 
-        if (page > totalPage) {
-            page = totalPage;
-        }
 
         paginationDTO.setPagination(totalPage, page);
 
@@ -109,5 +111,18 @@ public class QuestionService {
         BeanUtils.copyProperties(question, questionDTO);
         questionDTO.setUser(user);
         return questionDTO;
+    }
+
+    public void createOrUpdate(Question question) {
+        if(question.getId() == null){
+            //Create
+            question.setGmtCreate(System.currentTimeMillis());
+            question.setGmtModified(question.getGmtCreate());
+            questionMapper.create(question);
+        }else{
+            //Update
+            question.setGmtModified(System.currentTimeMillis());
+            questionMapper.update(question);
+        }
     }
 }
