@@ -2,6 +2,9 @@ package com.dennis.blog.service;
 
 import com.dennis.blog.dto.PaginationDTO;
 import com.dennis.blog.dto.QuestionDTO;
+import com.dennis.blog.exception.CustomizeErrorCode;
+import com.dennis.blog.exception.CustomizeException;
+import com.dennis.blog.mapper.QuestionExtendMapper;
 import com.dennis.blog.mapper.QuestionMapper;
 import com.dennis.blog.mapper.UserMapper;
 import com.dennis.blog.model.Question;
@@ -22,7 +25,13 @@ public class QuestionService {
     private QuestionMapper questionMapper;
 
     @Autowired
+    private QuestionExtendMapper questionExtendMapper;
+
+    @Autowired
     private UserMapper userMapper;
+
+
+
 
     public PaginationDTO list(Integer page, Integer size) {
 
@@ -112,6 +121,9 @@ public class QuestionService {
 
     public QuestionDTO getById(Integer id) {
         Question question = questionMapper.selectByPrimaryKey(id);
+        if(question == null){
+            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+        }
         User user = userMapper.selectByPrimaryKey(question.getCreator());
         QuestionDTO questionDTO = new QuestionDTO();
         //复制属性
@@ -128,7 +140,6 @@ public class QuestionService {
             questionMapper.insert(question);
         } else {
             //Update
-            question.setGmtModified(System.currentTimeMillis());
             Question updateQuestion = new Question();
             updateQuestion.setGmtModified(System.currentTimeMillis());
             updateQuestion.setTitle(question.getTitle());
@@ -136,7 +147,23 @@ public class QuestionService {
             updateQuestion.setTitle(question.getTag());
             QuestionExample example = new QuestionExample();
             example.createCriteria().andIdEqualTo(question.getId());
-            questionMapper.updateByExampleSelective(updateQuestion, example);
+            int updated = questionMapper.updateByExampleSelective(updateQuestion, example);
+            if(updated != 1){
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+            }
         }
+    }
+
+    public void incView(Integer id) {
+//        Question question = questionMapper.selectByPrimaryKey(id);
+//        Question updateQuestion = new Question();
+//        updateQuestion.setViewCount(question.getViewCount() + 1);
+//        QuestionExample questionExample = new QuestionExample();
+//        questionExample.createCriteria().andIdEqualTo(id);
+//        questionMapper.updateByExampleSelective(updateQuestion, questionExample);
+        Question question = new Question();
+        question.setId(id);
+        question.setViewCount(1);
+        questionExtendMapper.incView(question);
     }
 }
