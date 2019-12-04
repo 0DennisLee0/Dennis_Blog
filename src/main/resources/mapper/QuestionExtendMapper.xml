@@ -16,7 +16,8 @@
 
   <update id="incView" parameterType="com.dennis.blog.model.Question">
     UPDATE question
-    SET VIEW_COUNT = VIEW_COUNT + #{viewCount,jdbcType=INTEGER},
+    SET
+    VIEW_COUNT = VIEW_COUNT + #{viewCount,jdbcType=INTEGER}
     WHERE id = #{id}
   </update>
 
