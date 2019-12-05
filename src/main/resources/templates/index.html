@@ -9,6 +9,18 @@
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.js" type="application/javascript"></script>
 </head>
+<script type="application/javascript">
+    window.onload = function(){
+        debugger;
+        var closable = window.localStorage.getItem("closable");
+        // 确认页面是否满足要求可以关闭
+        if (closable == "true"){
+            window.close();
+            //关闭页面并移除Item
+            window.localStorage.removeItem("closable");
+        }
+    }
+</script>
 <body>
 <div th:insert="navigation :: nav"></div>
 <div class="container-fluid main">
