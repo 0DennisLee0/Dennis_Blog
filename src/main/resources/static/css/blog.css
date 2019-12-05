@@ -1,4 +1,4 @@
-body{
+body {
     background-color: #efefef;
 }
 
@@ -7,32 +7,49 @@ body{
     margin: 30px
 }
 
-.btn-publish{
+.btn-publish {
     float: right;
     margin: 15px;
 }
 
-.media-object{
+.media-object {
     width: 70px;
     height: 70px;
 }
 
-.text-desc{
+.media-body {
+    padding-top: 25px;
+}
+
+.font {
+    font-size: 18px;
+}
+
+.text-desc {
     font-size: 12px;
     font-weight: normal;
     color: #999;
 }
 
-.profile .section{
+.profile .section {
     margin-top: 20px;
 }
 
-.blog-menu{
+.blog-menu {
     color: #999;
     font-size: 16px;
 }
 
-.jumbotron{
+.jumbotron {
     background-color: #eeeeee;
     margin: 50px;
+}
+
+.comment {
+    margin: 10px 0px;
+}
+
+.btn-comment {
+    float: right;
+    margin-bottom: 10px;
 }

@@ -21,4 +21,11 @@
     WHERE id = #{id}
   </update>
 
+  <update id="incCommentCount" parameterType="com.dennis.blog.model.Question">
+    UPDATE question
+    SET
+    comment_count = comment_count + #{commentCount,jdbcType=INTEGER}
+    WHERE id = #{id}
+  </update>
+
 </mapper>

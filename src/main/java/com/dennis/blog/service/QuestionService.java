@@ -30,9 +30,6 @@ public class QuestionService {
     @Autowired
     private UserMapper userMapper;
 
-
-
-
     public PaginationDTO list(Integer page, Integer size) {
 
         PaginationDTO paginationDTO = new PaginationDTO();
@@ -117,6 +114,7 @@ public class QuestionService {
 
         paginationDTO.setQuestions(questionDTOList);
         return paginationDTO;
+
     }
 
     public QuestionDTO getById(Integer id) {
@@ -137,6 +135,9 @@ public class QuestionService {
             //Create
             question.setGmtCreate(System.currentTimeMillis());
             question.setGmtModified(question.getGmtCreate());
+            question.setViewCount(0);
+            question.setLikeCount(0);
+            question.setCommentCount(0);
             questionMapper.insert(question);
         } else {
             //Update
@@ -144,7 +145,7 @@ public class QuestionService {
             updateQuestion.setGmtModified(System.currentTimeMillis());
             updateQuestion.setTitle(question.getTitle());
             updateQuestion.setDescription(question.getDescription());
-            updateQuestion.setTitle(question.getTag());
+            updateQuestion.setTag(question.getTag());
             QuestionExample example = new QuestionExample();
             example.createCriteria().andIdEqualTo(question.getId());
             int updated = questionMapper.updateByExampleSelective(updateQuestion, example);

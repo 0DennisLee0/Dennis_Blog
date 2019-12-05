@@ -1,6 +1,9 @@
 package com.dennis.blog.dto;
 
+import com.dennis.blog.exception.CustomizeErrorCode;
+import com.dennis.blog.exception.CustomizeException;
 import lombok.Data;
+import org.springframework.web.servlet.ModelAndView;
 
 @Data
 public class ResultDTO {
@@ -13,6 +16,21 @@ public class ResultDTO {
         ResultDTO resultDTO = new ResultDTO();
         resultDTO.setCode(code);
         resultDTO.setMessage(message);
+        return resultDTO;
+    }
+
+    public static ResultDTO errorOf(CustomizeErrorCode errorCode){
+        return errorOf(errorCode.getCode(), errorCode.getMessage());
+    }
+
+    public static ResultDTO errorOf(CustomizeException e) {
+        return errorOf(e.getCode(), e.getMessage());
+    }
+
+    public static ResultDTO okOf(){
+        ResultDTO resultDTO = new ResultDTO();
+        resultDTO.setCode(200);
+        resultDTO.setMessage("好起来了");
         return resultDTO;
     }
 }
