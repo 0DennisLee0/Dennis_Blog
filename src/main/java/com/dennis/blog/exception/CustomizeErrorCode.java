@@ -7,7 +7,9 @@ public enum CustomizeErrorCode implements ICustomizeErrorCode {
     NO_LOGIN(2003, "没登录你发个锤子，右上角看不见？"),
     SYS_ERROR(2004,"Server is booming"),
     TYPE_PARAM_WRONG(2005,"评论瞎JB写/没得评论，这下挂了⑧"),
-    COMMENT_NOT_FOUND(2006,"评论⑧在，弟弟拜拜");
+    COMMENT_NOT_FOUND(2006,"评论⑧在，弟弟拜拜"),
+    CONTENT_IS_EMPTY(2007,"输入内容不能为空")
+    ;
 
     private String message;
     private Integer code;

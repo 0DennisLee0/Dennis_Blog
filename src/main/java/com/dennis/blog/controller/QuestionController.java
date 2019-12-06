@@ -2,6 +2,7 @@ package com.dennis.blog.controller;
 
 import com.dennis.blog.dto.CommentDTO;
 import com.dennis.blog.dto.QuestionDTO;
+import com.dennis.blog.enums.CommentTypeEnum;
 import com.dennis.blog.service.CommentService;
 import com.dennis.blog.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class QuestionController {
 
         QuestionDTO questionDTO = questionService.getById(id);
 
-        List<CommentDTO> comments = commentService.listByQuestionId(id);
+        List<CommentDTO> comments = commentService.listByTargetId(id, CommentTypeEnum.QUESTION);
 
         //累加阅读数与评论
         questionService.incView(id);
