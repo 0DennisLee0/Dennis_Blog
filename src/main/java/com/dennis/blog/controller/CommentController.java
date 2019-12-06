@@ -1,6 +1,6 @@
 package com.dennis.blog.controller;
 
-import com.dennis.blog.dto.CommentDTO;
+import com.dennis.blog.dto.CommentCreateDTO;
 import com.dennis.blog.dto.ResultDTO;
 import com.dennis.blog.exception.CustomizeErrorCode;
 import com.dennis.blog.model.Comment;
@@ -22,7 +22,7 @@ public class CommentController {
 
     @ResponseBody
     @PostMapping("/comment")
-    public Object post(@RequestBody CommentDTO commentDTO,
+    public Object post(@RequestBody CommentCreateDTO commentCreateDTO,
                        HttpServletRequest request) {
 
         User user = (User) request.getSession().getAttribute("user");
@@ -30,9 +30,9 @@ public class CommentController {
             return ResultDTO.errorOf(CustomizeErrorCode.NO_LOGIN);
         }
         Comment comment = new Comment();
-        comment.setParentId(commentDTO.getParentId());
-        comment.setContent(commentDTO.getContent());
-        comment.setType(commentDTO.getType());
+        comment.setParentId(commentCreateDTO.getParentId());
+        comment.setContent(commentCreateDTO.getContent());
+        comment.setType(commentCreateDTO.getType());
         comment.setGmtCreate(System.currentTimeMillis());
         comment.setGmtModified(System.currentTimeMillis());
         comment.setCommentator(1);

@@ -1,16 +1,24 @@
 package com.dennis.blog.service;
 
+import com.dennis.blog.dto.CommentDTO;
 import com.dennis.blog.enums.CommentTypeEnum;
 import com.dennis.blog.exception.CustomizeErrorCode;
 import com.dennis.blog.exception.CustomizeException;
 import com.dennis.blog.mapper.CommentMapper;
 import com.dennis.blog.mapper.QuestionExtendMapper;
 import com.dennis.blog.mapper.QuestionMapper;
-import com.dennis.blog.model.Comment;
-import com.dennis.blog.model.Question;
+import com.dennis.blog.mapper.UserMapper;
+import com.dennis.blog.model.*;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class CommentService {
@@ -23,6 +31,9 @@ public class CommentService {
 
     @Autowired
     private QuestionExtendMapper questionExtendMapper;
+
+    @Autowired
+    private UserMapper userMapper;
 
     @Transactional
     public void insert(Comment comment) {
@@ -52,5 +63,40 @@ public class CommentService {
             question.setCommentCount(1);
             questionExtendMapper.incCommentCount(question);
         }
+    }
+
+    public List<CommentDTO> listByQuestionId(Integer id) {
+
+        CommentExample commentExample = new CommentExample();
+        commentExample.createCriteria()
+                .andParentIdEqualTo(id)
+                .andTypeEqualTo(CommentTypeEnum.QUESTION.getType());
+        List<Comment> comments = commentMapper.selectByExample(commentExample);
+
+        if(comments.size() == 0){
+            return new ArrayList<>();
+        }
+
+        //使用lambda获取去重的评论人
+        Set<Integer> commentators = comments.stream().map(comment -> comment.getCommentator()).collect(Collectors.toSet());
+        List<Integer> userIds = new ArrayList<>();
+        userIds.addAll(commentators);
+
+        //获取评论人并转换为Map
+        UserExample userExample = new UserExample();
+        userExample.createCriteria()
+                .andIdIn(userIds);
+        List<User> users = userMapper.selectByExample(userExample);
+        Map<Integer, User> userMap = users.stream().collect(Collectors.toMap(user -> user.getId(), user -> user));
+
+        //转换 comment 为 commentDTO
+        List<CommentDTO> commentDTOS = comments.stream().map(comment -> {
+            CommentDTO commentDTO = new CommentDTO();
+            BeanUtils.copyProperties(comment, commentDTO);
+            commentDTO.setUser(userMap.get(comment.getCommentator()));
+            return commentDTO;
+        }).collect(Collectors.toList());
+
+        return commentDTOS;
     }
 }
