@@ -52,7 +52,7 @@ public class CommentController {
     @ResponseBody
     @GetMapping("/comment/{id}")
     public ResultDTO<List<CommentDTO>> comments(@PathVariable(name ="id") Integer id){
-        List<CommentDTO> commentDTOS = commentService.listByTargetId(id, CommentTypeEnum.QUESTION);
+        List<CommentDTO> commentDTOS = commentService.listByTargetId(id, CommentTypeEnum.COMMENT);
         return ResultDTO.okOf(commentDTOS);
     }
 

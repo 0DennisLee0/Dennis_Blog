@@ -51,8 +51,10 @@ public class QuestionService {
         //page = size *(page-1)
         Integer offset = size * (page - 1);
 
+        QuestionExample questionExample = new QuestionExample();
+        questionExample.setOrderByClause("gmt_create desc");
         List<Question> questions =
-                questionMapper.selectByExampleWithRowbounds(new QuestionExample(), new RowBounds(offset, size));
+                questionMapper.selectByExampleWithRowbounds(questionExample, new RowBounds(offset, size));
         List<QuestionDTO> questionDTOList = new ArrayList<>();
 
 
@@ -156,12 +158,6 @@ public class QuestionService {
     }
 
     public void incView(Integer id) {
-//        Question question = questionMapper.selectByPrimaryKey(id);
-//        Question updateQuestion = new Question();
-//        updateQuestion.setViewCount(question.getViewCount() + 1);
-//        QuestionExample questionExample = new QuestionExample();
-//        questionExample.createCriteria().andIdEqualTo(id);
-//        questionMapper.updateByExampleSelective(updateQuestion, questionExample);
         Question question = new Question();
         question.setId(id);
         question.setViewCount(1);

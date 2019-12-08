@@ -4,10 +4,7 @@ import com.dennis.blog.dto.CommentDTO;
 import com.dennis.blog.enums.CommentTypeEnum;
 import com.dennis.blog.exception.CustomizeErrorCode;
 import com.dennis.blog.exception.CustomizeException;
-import com.dennis.blog.mapper.CommentMapper;
-import com.dennis.blog.mapper.QuestionExtendMapper;
-import com.dennis.blog.mapper.QuestionMapper;
-import com.dennis.blog.mapper.UserMapper;
+import com.dennis.blog.mapper.*;
 import com.dennis.blog.model.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +32,9 @@ public class CommentService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private CommentExtendMapper commentExtendMapper;
+
     @Transactional
     public void insert(Comment comment) {
 
@@ -53,6 +53,13 @@ public class CommentService {
                 throw new CustomizeException(CustomizeErrorCode.COMMENT_NOT_FOUND);
             }
             commentMapper.insert(comment);
+
+            //增加评论数
+            Comment parentComment = new Comment();
+            parentComment.setId(comment.getParentId());
+            parentComment.setCommentCount(1);
+            commentExtendMapper.incCommentCount(parentComment);
+
         } else {
             //回复问题
             Question question = questionMapper.selectByPrimaryKey(comment.getParentId());
