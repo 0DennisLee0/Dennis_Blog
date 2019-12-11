@@ -7,9 +7,9 @@ import java.util.List;
 
 //页面所承载的元素
 @Data
-public class PaginationDTO {
+public class PaginationDTO<T> {
 
-    private List<QuestionDTO> questions;
+    private List<T> questions;
 
     private boolean showPrevious;
 
