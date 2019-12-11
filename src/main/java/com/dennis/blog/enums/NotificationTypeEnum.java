@@ -2,9 +2,8 @@ package com.dennis.blog.enums;
 
 public enum NotificationTypeEnum {
 
-    REPLY_QUESTION(1,"回复了问题"),
-    REPLY_COMMENT(2,"回复了评论")
-    ;
+    REPLY_QUESTION(1, "回复了问题"),
+    REPLY_COMMENT(2, "回复了评论");
 
     private int type;
     private String name;
@@ -17,8 +16,17 @@ public enum NotificationTypeEnum {
         return name;
     }
 
-    NotificationTypeEnum(int type, String name){
+    NotificationTypeEnum(int type, String name) {
         this.type = type;
         this.name = name;
+    }
+
+    public static String nameOfType(int type) {
+        for (NotificationTypeEnum notificationTypeEnum : NotificationTypeEnum.values()) {
+            if (notificationTypeEnum.getType() == type) {
+                return notificationTypeEnum.getName();
+            }
+        }
+        return "";
     }
 }
