@@ -10,7 +10,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="receiver" jdbcType="INTEGER" property="receiver" />
     <result column="notifier" jdbcType="INTEGER" property="notifier" />
-    <result column="outerId" jdbcType="INTEGER" property="outerid" />
+    <result column="outerId" jdbcType="INTEGER" property="outerId" />
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate" />
     <result column="status" jdbcType="INTEGER" property="status" />
@@ -154,7 +154,7 @@
       status, notifier_name, outer_title
       )
     values (#{id,jdbcType=INTEGER}, #{receiver,jdbcType=INTEGER}, #{notifier,jdbcType=INTEGER}, 
-      #{outerid,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{gmtCreate,jdbcType=BIGINT}, 
+      #{outerId,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{gmtCreate,jdbcType=BIGINT},
       #{status,jdbcType=INTEGER}, #{notifierName,jdbcType=VARCHAR}, #{outerTitle,jdbcType=VARCHAR}
       )
   </insert>
@@ -175,7 +175,7 @@
       <if test="notifier != null">
         notifier,
       </if>
-      <if test="outerid != null">
+      <if test="outerId != null">
         outerId,
       </if>
       <if test="type != null">
@@ -204,8 +204,8 @@
       <if test="notifier != null">
         #{notifier,jdbcType=INTEGER},
       </if>
-      <if test="outerid != null">
-        #{outerid,jdbcType=INTEGER},
+      <if test="outerId != null">
+        #{outerId,jdbcType=INTEGER},
       </if>
       <if test="type != null">
         #{type,jdbcType=INTEGER},
@@ -252,8 +252,8 @@
       <if test="record.notifier != null">
         notifier = #{record.notifier,jdbcType=INTEGER},
       </if>
-      <if test="record.outerid != null">
-        outerId = #{record.outerid,jdbcType=INTEGER},
+      <if test="record.outerId != null">
+        outerId = #{record.outerId,jdbcType=INTEGER},
       </if>
       <if test="record.type != null">
         type = #{record.type,jdbcType=INTEGER},
@@ -285,7 +285,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       receiver = #{record.receiver,jdbcType=INTEGER},
       notifier = #{record.notifier,jdbcType=INTEGER},
-      outerId = #{record.outerid,jdbcType=INTEGER},
+      outerId = #{record.outerId,jdbcType=INTEGER},
       type = #{record.type,jdbcType=INTEGER},
       gmt_create = #{record.gmtCreate,jdbcType=BIGINT},
       status = #{record.status,jdbcType=INTEGER},
@@ -309,8 +309,8 @@
       <if test="notifier != null">
         notifier = #{notifier,jdbcType=INTEGER},
       </if>
-      <if test="outerid != null">
-        outerId = #{outerid,jdbcType=INTEGER},
+      <if test="outerId != null">
+        outerId = #{outerId,jdbcType=INTEGER},
       </if>
       <if test="type != null">
         type = #{type,jdbcType=INTEGER},
@@ -339,7 +339,7 @@
     update notification
     set receiver = #{receiver,jdbcType=INTEGER},
       notifier = #{notifier,jdbcType=INTEGER},
-      outerId = #{outerid,jdbcType=INTEGER},
+      outerId = #{outerId,jdbcType=INTEGER},
       type = #{type,jdbcType=INTEGER},
       gmt_create = #{gmtCreate,jdbcType=BIGINT},
       status = #{status,jdbcType=INTEGER},

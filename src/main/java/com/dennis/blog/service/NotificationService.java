@@ -2,11 +2,11 @@ package com.dennis.blog.service;
 
 import com.dennis.blog.dto.NotificationDTO;
 import com.dennis.blog.dto.PaginationDTO;
+import com.dennis.blog.enums.NotificationStatusEnum;
 import com.dennis.blog.enums.NotificationTypeEnum;
 import com.dennis.blog.exception.CustomizeErrorCode;
 import com.dennis.blog.exception.CustomizeException;
 import com.dennis.blog.mapper.NotificationMapper;
-import com.dennis.blog.mapper.UserMapper;
 import com.dennis.blog.model.Notification;
 import com.dennis.blog.model.NotificationExample;
 import com.dennis.blog.model.User;
@@ -17,17 +17,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class NotificationService {
 
     @Autowired
     private NotificationMapper notificationMapper;
-
-    @Autowired
-    private UserMapper userMapper;
 
     public PaginationDTO list(Integer userId, Integer page, Integer size) {
 
@@ -57,7 +52,9 @@ public class NotificationService {
         }
 
         NotificationExample example = new NotificationExample();
-        example.createCriteria().andReceiverEqualTo(userId);
+        example.createCriteria()
+                .andReceiverEqualTo(userId);
+        example.setOrderByClause("gmt_create desc");
         List<Notification> notifications =
                 notificationMapper.selectByExampleWithRowbounds(example, new RowBounds(offset, size));
 
@@ -65,9 +62,8 @@ public class NotificationService {
             return paginationDTO;
         }
 
-        Set<Integer> disUserIds = notifications.stream().map(notify -> notify.getNotifier()).collect(Collectors.toSet());
-        List<Integer> userIds = new ArrayList<>(disUserIds);
-
+//        Set<Integer> disUserIds = notifications.stream().map(notify -> notify.getNotifier()).collect(Collectors.toSet());
+//        List<Integer> userIds = new ArrayList<>(disUserIds);
 //        UserExample userExample = new UserExample();
 //        userExample.createCriteria().andIdIn(userIds);
 //        List<User> users = userMapper.selectByExample(userExample);
@@ -89,7 +85,9 @@ public class NotificationService {
 
     public Long unreadCount(Integer userId) {
         NotificationExample notificationExample = new NotificationExample();
-        notificationExample.createCriteria().andReceiverEqualTo(userId);
+        notificationExample.createCriteria()
+                .andReceiverEqualTo(userId)
+                .andStatusEqualTo(NotificationStatusEnum.UNREAD.getStatus());
         return notificationMapper.countByExample(notificationExample);
     }
 
@@ -104,10 +102,12 @@ public class NotificationService {
             throw new CustomizeException(CustomizeErrorCode.READ_NOTIFICATION_FAIL);
         }
 
+        notification.setStatus(NotificationStatusEnum.READ.getStatus());
+        notificationMapper.updateByPrimaryKey(notification);
+
         NotificationDTO notificationDTO = new NotificationDTO();
         BeanUtils.copyProperties(notification, notificationDTO);
         notificationDTO.setTypeName(NotificationTypeEnum.nameOfType(notification.getType()));
         return notificationDTO;
-
     }
 }
