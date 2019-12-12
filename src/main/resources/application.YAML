@@ -11,6 +11,10 @@ spring:
       additional-paths: src/main/java #重启目录
       exclude: WEB-INF/**
 
+ucloud:
+  ufile:
+    private-key: 8973e061-49a6-415a-857b-b873f26afd93
+    public-key: TOKEN_a0c42a3c-3d2b-4789-9d4c-071d3834c6df
 
 github:
   client:
