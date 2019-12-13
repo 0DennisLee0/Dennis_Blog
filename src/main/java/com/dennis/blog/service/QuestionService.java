@@ -2,6 +2,7 @@ package com.dennis.blog.service;
 
 import com.dennis.blog.dto.PaginationDTO;
 import com.dennis.blog.dto.QuestionDTO;
+import com.dennis.blog.dto.QuestionQueryDTO;
 import com.dennis.blog.exception.CustomizeErrorCode;
 import com.dennis.blog.exception.CustomizeException;
 import com.dennis.blog.mapper.QuestionExtendMapper;
@@ -33,11 +34,21 @@ public class QuestionService {
     @Autowired
     private UserMapper userMapper;
 
-    public PaginationDTO list(Integer page, Integer size) {
+    public PaginationDTO list(String search, Integer page, Integer size) {
+
+        if(StringUtils.isNotBlank(search)){
+            String[] tags = StringUtils.split(search," ");
+            search = Arrays.stream(tags).collect(Collectors.joining("|"));
+        }
 
         PaginationDTO<QuestionDTO> paginationDTO = new PaginationDTO<>();
         Integer totalPage;
-        Integer totalCount = (int) questionMapper.countByExample(new QuestionExample());
+
+//        Integer totalCount = (int) questionMapper.countByExample(new QuestionExample());
+        QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
+        questionQueryDTO.setSearch(search);
+        Integer totalCount = questionExtendMapper.countBySearch(questionQueryDTO);
+
         totalPage = totalCount % size == 0 ? totalCount / size : totalCount / size + 1;
 
         if (page > totalPage) {
@@ -56,8 +67,10 @@ public class QuestionService {
 
         QuestionExample questionExample = new QuestionExample();
         questionExample.setOrderByClause("gmt_create desc");
+        questionQueryDTO.setPage(offset);
+        questionQueryDTO.setSize(size);
         List<Question> questions =
-                questionMapper.selectByExampleWithRowbounds(questionExample, new RowBounds(offset, size));
+                questionExtendMapper.selectBySearch(questionQueryDTO);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
 
 
