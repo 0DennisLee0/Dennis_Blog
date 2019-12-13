@@ -36,10 +36,7 @@
     <select id="countBySearch" parameterType="com.dennis.blog.dto.QuestionQueryDTO" resultType="java.lang.Integer">
         select count(*) from question
         <where>
-            <if test="search != ''">
-                and title regexp #{search}
-            </if>
-            <if test="search != null">
+            <if test="search != null and search != ''">
                 and title regexp #{search}
             </if>
         </where>
@@ -48,10 +45,7 @@
     <select id="selectBySearch" parameterType="com.dennis.blog.dto.QuestionQueryDTO" resultMap="BaseResultMap">
         select * from question
         <where>
-            <if test="search != ''">
-                and title regexp #{search}
-            </if>
-            <if test="search != null">
+            <if test="search != null and search != ''">
                 and title regexp #{search}
             </if>
         </where>

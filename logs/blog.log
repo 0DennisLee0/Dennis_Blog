@@ -1,0 +1,40 @@
+2019-12-13 22:45:54.207  INFO 8012 --- [Thread-10] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-12-13 22:45:54.211  INFO 8012 --- [Thread-10] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2019-12-13 22:45:54.215  INFO 8012 --- [Thread-10] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2019-12-13 22:45:54.544  INFO 8012 --- [restartedMain] com.dennis.blog.BlogApplication          : Starting BlogApplication on 0Dennis-Computer0 with PID 8012 (started by Dennis in E:\Java学习\blog)
+2019-12-13 22:45:54.544  INFO 8012 --- [restartedMain] com.dennis.blog.BlogApplication          : No active profile set, falling back to default profiles: default
+2019-12-13 22:45:54.784  WARN 8012 --- [restartedMain] org.apache.tomcat.util.modeler.Registry  : The MBean registry cannot be disabled because it has already been initialised
+2019-12-13 22:45:54.882  INFO 8012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-12-13 22:45:54.883  INFO 8012 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-12-13 22:45:54.883  INFO 8012 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
+2019-12-13 22:45:54.920  INFO 8012 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-12-13 22:45:54.920  INFO 8012 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 373 ms
+2019-12-13 22:45:54.931  INFO 8012 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2019-12-13 22:45:54.936  INFO 8012 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2019-12-13 22:45:54.936  INFO 8012 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/testdb?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC'
+2019-12-13 22:45:55.061  INFO 8012 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-12-13 22:45:55.073  INFO 8012 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-12-13 22:45:55.166  INFO 8012 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-12-13 22:45:55.176  INFO 8012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-12-13 22:45:55.176  INFO 8012 --- [restartedMain] com.dennis.blog.BlogApplication          : Started BlogApplication in 0.662 seconds (JVM running for 136.638)
+2019-12-13 22:45:55.178  INFO 8012 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2019-12-13 22:46:39.197  INFO 8012 --- [Thread-18] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-12-13 22:46:39.198  INFO 8012 --- [Thread-18] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2019-12-13 22:46:39.202  INFO 8012 --- [Thread-18] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2019-12-13 22:46:39.495  INFO 8012 --- [restartedMain] com.dennis.blog.BlogApplication          : Starting BlogApplication on 0Dennis-Computer0 with PID 8012 (started by Dennis in E:\Java学习\blog)
+2019-12-13 22:46:39.496  INFO 8012 --- [restartedMain] com.dennis.blog.BlogApplication          : No active profile set, falling back to default profiles: default
+2019-12-13 22:46:39.721  WARN 8012 --- [restartedMain] org.apache.tomcat.util.modeler.Registry  : The MBean registry cannot be disabled because it has already been initialised
+2019-12-13 22:46:39.823  INFO 8012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-12-13 22:46:39.824  INFO 8012 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-12-13 22:46:39.824  INFO 8012 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
+2019-12-13 22:46:39.856  INFO 8012 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-12-13 22:46:39.857  INFO 8012 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 359 ms
+2019-12-13 22:46:39.867  INFO 8012 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2019-12-13 22:46:39.870  INFO 8012 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2019-12-13 22:46:39.871  INFO 8012 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/testdb?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC'
+2019-12-13 22:46:39.982  INFO 8012 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-12-13 22:46:39.996  INFO 8012 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-12-13 22:46:40.088  INFO 8012 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-12-13 22:46:40.097  INFO 8012 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-12-13 22:46:40.097  INFO 8012 --- [restartedMain] com.dennis.blog.BlogApplication          : Started BlogApplication in 0.626 seconds (JVM running for 181.559)
+2019-12-13 22:46:40.098  INFO 8012 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged

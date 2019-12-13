@@ -27,14 +27,23 @@ github:
   redirect:
     uri: http://localhost:8080/callback
 
-
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
   type-aliases-package: com.dennis.blog.mapper
   mapper-locations: classpath:mapper/*.xml
 
+logging:
+  file:
+    name: logs/blog.log
+    max-size: 1MB
+#    表示保存3天以内的日志记录
+    max-history: 3
+  level:
+    root: info
+    com:
+      dennis:
+        blog:
+          mapper: debug
 
-pagehelper:
-  helperDialect: mysql
 
