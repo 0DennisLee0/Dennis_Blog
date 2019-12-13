@@ -28,24 +28,27 @@ public class ProfileController {
                           Model model,
                           HttpServletRequest request,
                           @RequestParam(name = "page", defaultValue = "1") Integer page,
-                          @RequestParam(name = "size", defaultValue = "5") Integer size) {
+                          @RequestParam(name = "size", defaultValue = "5") Integer size,
+                          @RequestParam(name = "search", required = false) String search) {
 
         User user = (User) request.getSession().getAttribute("user");
 
-        if(user == null){
+        if (user == null) {
             return "redirect:/";
         }
 
-        if ("data".equals(action)){
+        if ("data".equals(action)) {
             model.addAttribute("section", "data");
             model.addAttribute("sectionName", "我的提问");
             PaginationDTO paginationDTO = questionService.list(user.getId(), page, size);
             model.addAttribute("pagination", paginationDTO);
-        }else if("replies".equals(action)){
-            PaginationDTO paginationDTO = notificationService.list(user.getId(),page,size);
-            model.addAttribute("section","replies");
+            model.addAttribute("search",search);
+        } else if ("replies".equals(action)) {
+            PaginationDTO paginationDTO = notificationService.list(user.getId(), page, size);
+            model.addAttribute("section", "replies");
             model.addAttribute("pagination", paginationDTO);
             model.addAttribute("sectionName", "最新回复");
+            model.addAttribute("search",search);
         }
 
         return "profile";
