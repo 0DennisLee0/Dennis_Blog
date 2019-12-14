@@ -4,6 +4,9 @@ spring:
     username: root
     password: a54357412
 #    driver-class-name: com.mysql.jdbc.Driver
+  mvc:
+    favicon:
+      enabled: false
 
   devtools:
     restart:
@@ -41,9 +44,9 @@ logging:
     max-history: 3
   level:
     root: info
-    com:
-      dennis:
-        blog:
-          mapper: debug
+#    com:
+#      dennis:
+#        blog:
+#          mapper: debug
 
 

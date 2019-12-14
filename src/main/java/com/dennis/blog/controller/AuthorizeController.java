@@ -6,6 +6,7 @@ import com.dennis.blog.mapper.UserMapper;
 import com.dennis.blog.model.User;
 import com.dennis.blog.provider.GithubProvider;
 import com.dennis.blog.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 @Controller
+@Slf4j
 public class AuthorizeController {
 
     @Autowired
@@ -69,6 +71,7 @@ public class AuthorizeController {
             return "redirect:/";
             //success, write into cookie and session
         }else{
+            log.error("callback get github error, {}", githubUser);
             return "redirect:/";
             //failed
         }
