@@ -1,21 +1,10 @@
 ## 学习Spring Boot
 
 
-还是觉得Spring Boot好难搞啊，慢慢学，慢慢练习⑧
-
-##网站
-
-[Bootstrap](https://www.bootcss.com/)
-
-[Github](https://github.com/)
-
-[Bilbili](https://www.bilibili.com/)
-
-[Visual Paradigm](http://www.visual-paradigm.com)
-一款非常好用的画图软件
+基于Spring Boot和Bootstrap开发的个人博客
 
 
-## 脚本
+## 数据库脚本
 ```sql
 create table user
 (
@@ -27,8 +16,4 @@ create table user
     gmt_create   bigint       null,
     gmt_modified bigint       null
 );
-```
-
-```bash
-mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
 ```
